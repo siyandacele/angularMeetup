@@ -1,0 +1,22 @@
+$main_color: #1F1F24;
+$text_color: #B89775;
+.home-container {
+  background: #c93265;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.content {
+  position: relative;
+  background-size: cover;
+  flex: 1;
+  text-align: center;
+}
+
+.select-size {
+  width: 320px;
+  font-size: 1.4rem;
+}
