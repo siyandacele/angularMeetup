@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MeetupModule } from './meetup/meetup.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,10 +13,11 @@ import { MeetupModule } from './meetup/meetup.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    HttpClientModule,
     CoreModule,
     MeetupModule
   ],
+  exports: [AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent]
 })

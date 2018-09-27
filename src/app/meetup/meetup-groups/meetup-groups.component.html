@@ -1,23 +1,23 @@
 <div class="container">
-  <div class="box">
-    <div class="box-header">
-      <h3><a href=""><img src="https://goo.gl/oOD0V2" alt="" /><span>Organizer:</span> Roswell Parian</a>
-        <span>Johannesburg, South Africa</span>
-        <span>Members: 3262 Status: active</span>
-        <span>Category: Arts & Culture</span>
+  <div class="box" *ngFor="let group of groups">
+    <div class="box-content">
+        <div class="content">
+          <h3><a href="{{ group.link }}">{{ group.name }}</a></h3>
+          <span>{{ group.localized_location }}</span>
+          <span>Category: <a style="cursor: pointer" [routerLink]="['/groups/', group.category.id]">{{ group.category.name }}</a></span>
+          <div class="disc" [innerHTML]="group.description | toHtml">
+          </div>
+          <div class="img"><img src="{{ group.key_photo?.photo_link || 'https://www.foot.com/wp-content/uploads/2017/03/placeholder.gif' }}" alt="" /></div>
+        </div>
+    </div>
+    <div class="box-organizer">
+      <h3><a href=""><img src="{{ group.organizer.photo?.photo_link || 'https://munkschool.utoronto.ca/mga/files/2017/07/blank-profile-picture-973461_960_720.png' }}" alt="" /><span>Organizer:</span> {{ group.organizer.name }}</a>
+        <span>Members: {{ group.members }}</span>
       </h3>
     </div>
     <div class="box-content">
       <div class="content">
-        <h3>JOZI walks, culture and fun</h3>
-        <div class="disc">
-            <p>- Are you looking for friends who also are interested in walking in nature, in movies, live shows, lunch or dinner in interesting places? <br>- Do you prefer to visit museums or game reserves in the company of friends or are you looking for like minded people to do activities on your bucket list? <br>- Are you interested in exploring the beautiful part of the world we live in? <br><b><i>Join us and have fun doing the things you like while in great company.</i></b>&nbsp;&nbsp;</p>
-            <p></p>
-            <p><span>Participation in events and travel in relation to events is for the sole cost, risk and responsibility of participants.</span></p>
-            <p><span><br></span></p>
-            <p>Please ensure that your meetup settings for "JOZI walks, culture and fun" allow updates to be sent to you re events you have RSVP'ed for as attending. This will avoid disappointment as a result of a missed message re a change or update of an event.<br></p>
-        </div>
-        <div class="img"><img src="https://goo.gl/g0Xdh3" alt="" /></div>
+        <div class="img"><img src="{{ group.group_photo?.photo_link || 'https://cdn.dribbble.com/users/634336/screenshots/2246883/_____.png' }}" alt="" /></div>
       </div>
     </div>
   </div>

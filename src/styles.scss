@@ -1,8 +1,7 @@
 
-@import url('https://fonts.googleapis.com/css?family=Permanent+Marker');
-@import url('https://fonts.googleapis.com/css?family=Pridi:300,700');
+@import url('https://fonts.googleapis.com/css?family=Pridi:300,500,700');
 @import '~@angular/material/theming';
-
+@import './assets/variables';
 $custom-typography: mat-typography-config(
     $font-family: '"Pridi", serif;'
 );
@@ -14,7 +13,7 @@ $my-dark-theme-background: (
   app-bar:    map_get($mat-blue, 900),
   background: orange,
   hover:      rgba(white, 0.04),
-  card:       map_get($mat-pink, A700),
+  card:       $primary-color,
   dialog:     map_get($mat-grey, 800),
   disabled-button: $white-12-opacity,
   raised-button: map-get($mat-grey, 800),
@@ -73,13 +72,36 @@ body {
   margin: 0;
   font-family: 'Pridi', serif;
   font-size: .9rem;
+  font-weight: 300;
 }
+nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background: #fff;
+  text-align: center;
+  height: 50px;
+  box-shadow: 0 0 50px 5px rgba(0,0,0,.25);
+
+  a {
+    display: inline-block;
+    font-size: 2.2rem;
+    color: $primary-color;
+    line-height:3.2rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
 a {
   text-decoration: none;
+  color: $dark-primary-color;
+  font-weight: 400;
 }
 
 footer {
-  background: #30101b;
+  background: $dark-primary-color;
   padding: 1rem;
   text-align: center;
   color: #fff;
@@ -88,21 +110,14 @@ footer {
     font-weight: 700;
   }
 }
-
-.home--btn {
-  padding: 12px 15px;
-  background: transparent;
-  border: 2px solid #fff;
-  font-size: 1vw;
-  cursor: pointer;
-  transition: 0.5s;
+.home-container {
+  background: $primary-color;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #fff;
-  &:hover {
-    color: #fff;
-    background: #751636;
-  }
 }
-
 
 // ============================ //
 // ========= TEXT STYLE ======= //
@@ -126,3 +141,4 @@ footer {
   font-weight: 300;
   letter-spacing: -0.4;
 }
+
