@@ -4,6 +4,7 @@ import { CONFIG } from '../app-config';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Category } from './category.model';
+import { sharedStylesheetJitUrl } from '@angular/compiler';
 
 @Injectable()
 export class MeetupService {

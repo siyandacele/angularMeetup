@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/finally';
 import { Category } from '../category.model';
 import { MeetupService } from '../meetup.service';
 
@@ -18,11 +18,12 @@ export class MeetupSettingsComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.categories = this.meetupService.getCategories();
-
-    this.categories.subscribe(res => {
+    this.categories = this.meetupService.getCategories()
+    .finally(() => {
       this.placeholder = 'Choose a category';
     });
+
+    this.categories.subscribe();
   }
 
   loadGroups(id: number) {
