@@ -6,7 +6,7 @@
       powerful things happen. Choose a category of group you want to see.</h3>
     <mat-form-field class="select-size">
       <mat-select placeholder="{{placeholder}}"  [(ngModel)]="why" (ngModelChange)="loadGroups($event)">
-        <mat-option *ngFor="let category of categories | async" [value]="category.id">
+        <mat-option *ngFor="let category of categories " [value]="category.id">
           {{category.name}}
         </mat-option>
       </mat-select>

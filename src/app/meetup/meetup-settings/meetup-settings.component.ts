@@ -1,29 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/finally';
 import { Category } from '../category.model';
 import { MeetupService } from '../meetup.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-meetup-settings',
   templateUrl: './meetup-settings.component.html',
   styleUrls: ['./meetup-settings.component.scss']
 })
-export class MeetupSettingsComponent implements OnInit {
-  categories: Observable<Category[]>;
+export class MeetupSettingsComponent implements OnInit, OnDestroy {
+  categories: Category[];
+  subscription: Subscription;
   placeholder = 'Please wait...';
 
   constructor(private meetupService: MeetupService,
               private router: Router) { }
 
   ngOnInit() {
-    this.categories = this.meetupService.getCategories()
-    .finally(() => {
-      this.placeholder = 'Choose a category';
-    });
+    const localCategories = this.meetupService.getLocalCategories();
+    if (localCategories.length === 0) {
+      this.meetupService.getCategories();
+      console.log('Called');
+        this.subscription = this.meetupService.newCategories.subscribe(
+        (categories: Category[]) => {
+          this.categories = categories;
+          this.placeholder = 'Choose categories';
+        }
+      );
+    } else {
+      this.categories = localCategories;
+      this.placeholder = 'Choose categories';
+    }
+  }
 
-    this.categories.subscribe();
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   loadGroups(id: number) {
