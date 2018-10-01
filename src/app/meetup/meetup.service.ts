@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CONFIG } from '../app-config';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Category } from './category.model';
 import { sharedStylesheetJitUrl } from '@angular/compiler';
 import { Subject } from 'rxjs';
@@ -38,9 +38,10 @@ export class MeetupService {
 
   getCategories() {
     return this._getApi(CONFIG.categoriesPath)
-      .map(res => {
+      .pipe(
+        map(res => {
           return res['results'];
-      })
+      }))
       .subscribe(
         (categories: Category[]) => {
           this._setCategories(categories);

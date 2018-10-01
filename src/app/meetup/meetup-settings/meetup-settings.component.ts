@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/finally';
 import { Category } from '../category.model';
 import { MeetupService } from '../meetup.service';
 import { Subscription } from 'rxjs';
@@ -23,7 +21,6 @@ export class MeetupSettingsComponent implements OnInit, OnDestroy {
     const localCategories = this.meetupService.getLocalCategories();
     if (localCategories.length === 0) {
       this.meetupService.getCategories();
-      console.log('Called');
         this.subscription = this.meetupService.newCategories.subscribe(
         (categories: Category[]) => {
           this.categories = categories;
